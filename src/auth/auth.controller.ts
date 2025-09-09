@@ -19,6 +19,6 @@ export class AuthController {
     // req.user contains Google user info
     console.log(req.user);
     const data = await this.googleAuthUseCase.execute({ ...req.user, tkn: 0 });
-    return res.redirect(`http://localhost:3000/${data}`);
+    return res.redirect(`${process.env.APP_URL}/${data}`);
   }
 }

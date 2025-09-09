@@ -27,7 +27,7 @@ RUN npm install --production
 COPY --from=builder /app/dist ./dist
 
 # Copy any other necessary files (like .env)
-COPY .env ./
+#COPY .env ./
 
 # Expose port from environment variable
 EXPOSE ${PORT:-3000}

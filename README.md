@@ -33,17 +33,34 @@ pnpm install
 #### ou
 bun install
 
-# Configure as variáveis de ambiente
+#### Crie um projeto no Google Cloud
+Vá no [Google Cloud Console](https://console.cloud.google.com/apis/credentials) e em Credenciais, crie um novo cliente OAuth2.0
+
+Em "Origens JavaScript autorizadas", coloque as URLs do mvg-game e mvg-backend. Por padrão, são:
+```
+http://localhost:3000
+http://localhost:5000
+```
+
+E em "URIs de redirecionamento autorizados", coloque:
+```
+http://localhost:5000/auth/google/callback
+```
+
+Completando isso, você receberá um ID e um Secret do cliente OAuth2.0.
+
+#### Configure as variáveis de ambiente
 
 ```bash
 cp .env.example .env.local
 ```
 
-# Rode o servidor de desenvolvimento
+#### Rode o servidor de desenvolvimento
 
+```
 npm run dev
-
-Acesse o app em http://localhost:3000
+```
+Acesse a API em http://localhost:5000
 
 # ⚙️ Variáveis de Ambiente
 

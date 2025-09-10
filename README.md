@@ -1,98 +1,124 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="" target="blank"><img src="https://raw.githubusercontent.com/Nyffi/mvg-game/refs/heads/main/public/bleize-dark.png" width="320" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**Backend com autorização feito no Nest.js**
 
-## Description
+Este repositório contém o backend do projeto MVG, desenvolvido com **NestJS** e TypeScript, responsável por oferecer endpoints seguros para jogos, saldo, produtos e checkout.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+##  Documentação
 
-```bash
-$ npm install
-```
+### 1. Como rodar localmente
 
-## Compile and run the project
+**Pré-requisitos**
+- Node.js >= 18
+- npm, yarn, pnpm ou bun
+- MongoDB
 
-```bash
-# development
-$ npm run start
+**Passos**
 
-# watch mode
-$ npm run start:dev
+#### Clone o repositório
+git clone https://github.com/Nyffi/mvg-backend.git
+cd mvg-backend
 
-# production mode
-$ npm run start:prod
-```
+#### Instale as dependências
+npm install
+#### ou
+yarn install
+#### ou
+pnpm install
+#### ou
+bun install
 
-## Run tests
+# Configure as variáveis de ambiente
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env.local
 ```
 
-## Deployment
+# Rode o servidor de desenvolvimento
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+npm run dev
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Acesse o app em http://localhost:3000
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# ⚙️ Variáveis de Ambiente
+
+Exemplo de arquivo .env.example:
+
+```
+# Chave usada para assinar/verificar JWTs (mesma do mvg-game)
+JWT_SECRET=changeme123
+
+# URL de conexão com o banco de dados
+MONGODB_URI=mongodb+srv://...
+
+# ID de client do Google
+GOOGLE_CLIENT_ID=id-client-google
+
+# Secret de client do Google
+GOOGLE_CLIENT_SECRET=secret-client-google
+
+# URL de callback depois que logar com o Google
+GOOGLE_CALLBACK_URL=http://localhost:5000/auth/google/callback
+
+# Porta onde o Nest vai rodar (a porta 5000 é recomendada para evitar conflito)
+PORT=5000
+
+# URL de redirecionamento pós-autenticação
+APP_URL="http://localhost:3000"
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Copie este arquivo para .env e ajuste os valores conforme sua configuração.
+# Endpoints principais
 
-## Resources
+Este backend expõe endpoints principais para autenticação e funcionalidades do jogo, como:
+```
+Endpoint	        Método	Descrição
+/auth/google	        GET	Redireciona para a página de login do Google
+/auth/google/callback	GET	Pega/cria os dados do usuário, gera um JWT e redireciona para APP_URL
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+Nota: Os endpoints podem ser ajustados conforme evolução do backend. Revise a pasta src para confirmações mais precisas.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Como funciona a integração entre os sistemas
 
-## Support
+O frontend ([Nyffi/mvg-game](https://github.com/Nyffi/mvg-game)) envia o usuário sem autenticação para a rota /auth/google.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+O google faz o callback com os dados do usuário na rota /auth/google/callback, e faz uma pesquisa no MongoDB. Caso o usuário não exista, é criado um registro novo com os dados obtidos, depois é feito um JWT e enviado como parâmetro para APP_URL.
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Decisões Técnicas de Arquitetura
 
-## License
+#### NestJS (TypeScript)
+Estrutura escalável, modular e baseada em injeção de dependências.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### JWT para autenticação
+Simples e eficiente para comunicação entre frontend e backend, e permite que SSO seja implementado.
+
+#### Estrutura modular
+Separação clara entre módulos (Auth, Game, Users, Products, Checkout).
+
+#### Docker
+Usado para conteinerizar o projeto para ser publicado no Render
+
+
+# Limitações conhecidas
+
+#### Persistência de dados
+Sem MONGODB_URI configurado, os dados não serão armazenados de forma alguma.
+
+#### Funcionalidades incompletas
+Originalmente era para fornecer dados para o e-commerce e também ser usado como servidor de autenticação.
+
+#### Tokens JWT
+Sem refresh tokens como padrão, possível expiração abrupta.
+
+#### Escalabilidade limitada
+Em ambiente de alta carga, pode exigir refatoração (por exemplo, extração de módulos em microservices).
+
+#### Testes incompletos
+Nenhuma das rotas utilizada é testada de fato
